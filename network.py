@@ -138,13 +138,13 @@ class CL_protNET(torch.nn.Module):
         self.softmax = nn.Softmax(dim=-1)
      
     def forward(self, data, num_vertices, num_edges, lp_evecs):
-        #x_aa = self.one_hot_embed(data.native_x.long())
-        #x_aa = self.proj_aa(x_aa)
+        x_aa = self.one_hot_embed(data.native_x.long())
+        x_aa = self.proj_aa(x_aa)
         
         if self.esm_embed:
             x = data.x.float()
             x_esm = self.proj_esm(x)
-        #    x = F.relu(x_aa + x_esm)
+            x = F.relu(x_aa + x_esm)
             x = F.relu(x_esm)
             
         else:
